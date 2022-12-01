@@ -1,0 +1,46 @@
+server:
+    port: 8081
+
+spring:
+    application:
+        name: scarf-fracas-authsvr
+
+
+##########개발용 DB설정(H2)#########################################                                                               
+    datasource:                                                  
+        url: jdbc:mariadb://${DB_URL}                          
+        driver-class-name: org.mariadb.jdbc.Driver                         
+        username: ${DB_USER}                                             
+        password: ${DB_PW}                                                               
+    jpa.hibernate.ddl-auto: update                               
+    jpa.show-sql: true                                           
+    jpa.database-platform: org.hibernate.dialect.MariaDB103Dialect
+                                                              
+##################################################################
+logging:
+    level:
+        org:
+            hiberante:
+                SQL: debug
+                type:
+                    descriptor:
+                        sql: trace
+
+
+
+
+jwt:
+    secret: "bizpeer"
+    ExpirationMs: 3600000
+    RefreshExpirationMs: 86400000
+
+
+eureka:
+    instance:
+        hostname: scarf-fracas-authsvr
+        prefer-ip-address: true
+    client:
+        service-url:
+            defaultZone: ${EUREKAURL}/eureka/
+        register-with-eureka: true
+        fetch-registry: true
